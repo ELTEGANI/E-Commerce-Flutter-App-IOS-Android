@@ -1,4 +1,5 @@
-import 'package:e_commerace/data/popular_product_controller.dart';
+import 'package:e_commerace/controllers/popular_product_controller.dart';
+import 'package:e_commerace/controllers/recommended_product_controler.dart';
 import 'package:e_commerace/pages/food/recommended_food_detail.dart';
 import 'package:e_commerace/pages/home/food_page_body.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

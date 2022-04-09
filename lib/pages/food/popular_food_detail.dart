@@ -1,9 +1,12 @@
+import 'package:e_commerace/pages/home/main_food_page.dart';
 import 'package:e_commerace/utils/dimensions.dart';
 import 'package:e_commerace/widgets/app_column.dart';
 import 'package:e_commerace/widgets/app_icon.dart';
 import 'package:e_commerace/widgets/expandable_text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
@@ -43,8 +46,13 @@ class PopularFoodDetial extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                  AppIcon(iconData: Icons.arrow_back_ios),
-                  AppIcon(iconData: Icons.shopping_cart_outlined)
+                  GestureDetector(
+                      onTap:(){
+                        Get.to(()=>MainFoodPage());
+                      },
+                      child:
+                      AppIcon(iconData: Icons.arrow_back_ios)),
+                      AppIcon(iconData: Icons.shopping_cart_outlined)
               ],
           )),
           //introduction

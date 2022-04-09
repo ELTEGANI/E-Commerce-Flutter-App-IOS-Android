@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/controllers/recommended_product_controler.dart';
+import 'package:e_commerace/pages/food/popular_food_detail.dart';
+import 'package:e_commerace/routes/route_helper.dart';
 import 'package:e_commerace/utils/app_constants.dart';
 import 'package:e_commerace/utils/colors.dart';
 import 'package:e_commerace/utils/dimensions.dart';
@@ -46,14 +48,19 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         return popularProducts.isLoaded?Container(
           // color: Colors.redAccent,
           height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount:popularProducts.popularProductList.length,
-              itemBuilder: (context,position){
-                return _buildPageItem(position,popularProducts.popularProductList[position]);
-              }),
+          child: GestureDetector(
+            onTap:(){
+              Get.toNamed(RouteHelper.getPopularFood());
+            },
+            child: PageView.builder(
+                controller: pageController,
+                itemCount:popularProducts.popularProductList.length,
+                itemBuilder: (context,position){
+                  return _buildPageItem(position,popularProducts.popularProductList[position]);
+                }),
+          ),
         ):
-        CircularProgressIndicator(color: AppColors.mainColor,);
+        CircularProgressIndicator(color: AppColors.mainColor);
       }),
 
       //dots

@@ -3,6 +3,7 @@ import 'package:e_commerace/controllers/recommended_product_controler.dart';
 import 'package:e_commerace/pages/food/recommended_food_detail.dart';
 import 'package:e_commerace/pages/home/food_page_body.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
+import 'package:e_commerace/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -25,10 +26,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MainFoodPage(),
+      getPages: RouteHelper.routes,
     );
   }
 }

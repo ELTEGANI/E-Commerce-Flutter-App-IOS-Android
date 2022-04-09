@@ -1,4 +1,7 @@
+import 'package:e_commerace/controllers/popular_product_controller.dart';
+import 'package:e_commerace/controllers/recommended_product_controler.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
+import 'package:e_commerace/utils/app_constants.dart';
 import 'package:e_commerace/utils/dimensions.dart';
 import 'package:e_commerace/widgets/app_column.dart';
 import 'package:e_commerace/widgets/app_icon.dart';
@@ -7,17 +10,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
-import '../../widgets/icon_and_text_widget.dart';
-import '../../widgets/small_text.dart';
 
 class PopularFoodDetial extends StatelessWidget {
-  const PopularFoodDetial({Key? key}) : super(key: key);
+  final int pageId;
+  const PopularFoodDetial({Key? key,required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
+    print("page  id is"+pageId.toString());
+    print("product name is"+product.name.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -32,8 +36,8 @@ class PopularFoodDetial extends StatelessWidget {
                decoration: BoxDecoration(
                  image: DecorationImage(
                    fit: BoxFit.cover,
-                   image: AssetImage(
-                     "assets/image/food0.png"
+                   image: NetworkImage(
+                     AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!
                    )
                  )
                ),
@@ -77,11 +81,11 @@ class PopularFoodDetial extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
-                     AppColumn(text: "Chinese Side"),
+                     AppColumn(text:product.name!),
                      SizedBox(height: Dimensions.height20),
                      BigText(text: "Introduce"),
                      SizedBox(height: Dimensions.height20),
-                     Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text:"It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")))
+                     Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text:product.description!)))
                    ],
                 ),
               )),
@@ -123,7 +127,7 @@ class PopularFoodDetial extends StatelessWidget {
                ),
              ),
              Container(
-               child:BigText(text:"\$10 | Add to Cart",color: Colors.white,),
+               child:BigText(text:"\$${product.price!} "+"| Add to Cart",color: Colors.white,),
                padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
                decoration: BoxDecoration(
                  borderRadius: BorderRadius.circular(Dimensions.radius20),

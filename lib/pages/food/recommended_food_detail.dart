@@ -5,6 +5,9 @@ import 'package:e_commerace/widgets/big_text.dart';
 import 'package:e_commerace/widgets/expandable_text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../routes/route_helper.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   const RecommendedFoodDetail({Key? key}) : super(key: key);
@@ -16,11 +19,17 @@ class RecommendedFoodDetail extends StatelessWidget {
         body: CustomScrollView(
            slivers: [
              SliverAppBar(
+               automaticallyImplyLeading:false,
                toolbarHeight:70,
                title:Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
-                   AppIcon(iconData: Icons.clear),
+                   GestureDetector(
+                     onTap:(){
+                       Get.toNamed(RouteHelper.getInitial());
+                     },
+                     child:AppIcon(iconData: Icons.clear),
+                   ),
                    AppIcon(iconData: Icons.shopping_cart_outlined)
                  ],
                ),

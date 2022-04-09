@@ -9,21 +9,23 @@ class RouteHelper{
   static const String  recommendedFood = "/recommended-food";
 
   static String  getInitial()=>'$initial';
-  static String  getPopularFood()=>'$popularFood';
-  static String  getRecommendedFood()=>'$recommendedFood';
+  static String  getPopularFood(int pageId)=>'$popularFood?pageId=$pageId';
+  static String  getRecommendedFood(int pageId)=>'$recommendedFood?pageId=$pageId';
 
 
   static List<GetPage> routes = [
     GetPage(name:initial, page:()=>MainFoodPage()),
 
     GetPage(name:popularFood,page:(){
-      return PopularFoodDetial();
+      var pageId = Get.parameters['pageId'];
+      return PopularFoodDetial(pageId:int.parse(pageId!));
     },
       transition:Transition.fadeIn
     ),
 
     GetPage(name:recommendedFood,page:(){
-      return RecommendedFoodDetail();
+      var pageId = Get.parameters['pageId'];
+      return RecommendedFoodDetail(pageId:int.parse(pageId!));
     },
         transition:Transition.fadeIn
     ),

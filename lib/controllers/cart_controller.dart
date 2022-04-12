@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/cartModel.dart';
+import '../utils/colors.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
@@ -14,8 +15,10 @@ class CartController extends GetxController {
   Map<int,CartModel> get items=>_items;
 
   void addItem(ProductModel productModel, int quantity) {
+    var tottalQuantity=0;
     if(_items.containsKey(productModel.id!)){
       _items.update(productModel.id!, (value){
+      tottalQuantity=value.quantity!+quantity;
         return CartModel(
             id: value.id,
             name: value.name,
@@ -27,21 +30,50 @@ class CartController extends GetxController {
             time: DateTime.now().toString()
         );
       });
+      if(tottalQuantity<=0){
+        _items.remove(productModel.id);
+      }
     }else{
-      _items.putIfAbsent(productModel.id!, () {
-        return CartModel(
-            id: productModel.id,
-            name: productModel.name,
-            description: productModel.description,
-            price: productModel.price,
-            img: productModel.img,
-            quantity: quantity,
-            isExist: true,
-            time: DateTime.now().toString()
+      if(quantity>0){
+        _items.putIfAbsent(productModel.id!, () {
+          return CartModel(
+              id: productModel.id,
+              name: productModel.name,
+              description: productModel.description,
+              price: productModel.price,
+              img: productModel.img,
+              quantity: quantity,
+              isExist: true,
+              time: DateTime.now().toString()
+          );
+        }
+        );
+      }else{
+        Get.snackbar("Item count","You Should at least add item in the cart",backgroundColor:AppColors.mainColor,
+            colorText:Colors.white
         );
       }
-      );
     }
 
   }
+
+  bool existInCart(ProductModel productModel){
+    if(_items.containsKey(productModel.id)){
+      return true;
+    }
+    return false;
+  }
+
+ int getQuantity(ProductModel productModel){
+     var quantity=0;
+     if(_items.containsKey(productModel.id!)){
+         _items.forEach((key, value) {
+           if(key==productModel.id){
+              quantity = value.quantity!;
+           }
+         });
+     }
+     return quantity;
+  }
+
 }

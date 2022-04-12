@@ -1,3 +1,4 @@
+import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/data/repository/popular_product_repo.dart';
 import 'package:e_commerace/models/products_model.dart';
 import 'package:e_commerace/utils/colors.dart';
@@ -9,10 +10,14 @@ class PopularProductController extends GetxController{
   PopularProductController({required this.popularProductRepo});
   List<dynamic> _popularProductList = [];
   List<dynamic> get popularProductList => _popularProductList;
+  late CartController _cartController;
+
   bool  _isLoaded = false;
   bool get isLoaded=>_isLoaded;
   int _quantity = 0;
   int get quantity=>_quantity;
+  int _inCartItems=0;
+  int get inCartItems=>_inCartItems+_quantity;
 
   Future<void> getPopularProductList() async{
      Response response = await popularProductRepo.getPopularProductList();
@@ -49,9 +54,24 @@ class PopularProductController extends GetxController{
       return quantity;
     }
   }
-
-  void initProduct(){
+  void initProduct(CartController cartController){
     _quantity = 0;
+    _inCartItems = 0;
+    _cartController=cartController;
+  }
+
+  void addItem(ProductModel productModel){
+     if(_quantity>0){
+       _cartController.addItem(productModel,_quantity);
+       _quantity = 0;
+      _cartController.items.forEach((key, value) {
+         print("The id is"+value.id.toString()+"The quantity is "+value.quantity.toString());
+      });
+     }else{
+       Get.snackbar("Item count","You Should at least add item in the cart",backgroundColor:AppColors.mainColor,
+           colorText:Colors.white
+       );
+     }
   }
 
 

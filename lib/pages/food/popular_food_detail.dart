@@ -1,3 +1,4 @@
+import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/controllers/recommended_product_controler.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
@@ -20,7 +21,8 @@ class PopularFoodDetial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var product = Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct();
+    Get.find<PopularProductController>().initProduct(Get.find<CartController>());
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -137,7 +139,11 @@ class PopularFoodDetial extends StatelessWidget {
                 ),
               ),
               Container(
-                child:BigText(text:"\$${product.price!} "+"| Add to Cart",color: Colors.white,),
+                child:GestureDetector(
+                    onTap:(){
+                     popularProduct.addItem(product);
+                    },
+                    child: BigText(text:"\$${product.price!} "+"| Add to Cart",color: Colors.white,)),
                 padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),

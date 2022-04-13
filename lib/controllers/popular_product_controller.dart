@@ -19,7 +19,7 @@ class PopularProductController extends GetxController{
   int _inCartItems=0;
   int get inCartItems=>_inCartItems+_quantity;
 
-  Future<void> getPopularProductList() async{
+  Future<void> getPopularProductList() async {
      Response response = await popularProductRepo.getPopularProductList();
      if(response.statusCode ==  200){
        _popularProductList = [];
@@ -72,15 +72,14 @@ class PopularProductController extends GetxController{
        _cartController.addItem(productModel,_quantity);
        _quantity = 0;
        _inCartItems=_cartController.getQuantity(productModel);
-      _cartController.items.forEach((key, value) {
+       _cartController.items.forEach((key, value) {
          print("The id is"+value.id.toString()+"The quantity is "+value.quantity.toString());
       });
-     // }else{
-     //   Get.snackbar("Item count","You Should at least add item in the cart",backgroundColor:AppColors.mainColor,
-     //       colorText:Colors.white
-     //   );
-     // }
+    update();
   }
 
+  int get totalItems{
+    return _cartController.totalItems;
+  }
 
 }

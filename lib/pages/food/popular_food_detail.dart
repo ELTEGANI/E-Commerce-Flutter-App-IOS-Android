@@ -1,6 +1,7 @@
 import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/controllers/recommended_product_controler.dart';
+import 'package:e_commerace/pages/cart/cart_page.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
 import 'package:e_commerace/utils/app_constants.dart';
 import 'package:e_commerace/utils/dimensions.dart';
@@ -65,8 +66,13 @@ class PopularFoodDetial extends StatelessWidget {
                       Get.find<PopularProductController>().totalItems >= 1?
                       Positioned(
                           right:0,top:0,
-                          child: AppIcon(iconData: Icons.circle,size:20,
-                              iconColor:Colors.transparent,backColor:AppColors.mainColor)
+                          child: GestureDetector(
+                            onTap:(){
+                              Get.to(()=>CartPage());
+                            },
+                            child: AppIcon(iconData: Icons.circle,size:20,
+                                iconColor:Colors.transparent,backColor:AppColors.mainColor),
+                          )
                       )
                            :Container(),
                       Get.find<PopularProductController>().totalItems >= 1?

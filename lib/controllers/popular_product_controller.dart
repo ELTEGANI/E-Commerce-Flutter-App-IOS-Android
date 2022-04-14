@@ -1,5 +1,6 @@
 import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/data/repository/popular_product_repo.dart';
+import 'package:e_commerace/models/cartModel.dart';
 import 'package:e_commerace/models/products_model.dart';
 import 'package:e_commerace/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -44,11 +45,13 @@ class PopularProductController extends GetxController{
       Get.snackbar("Item count","You can't reduce more",backgroundColor:AppColors.mainColor,
       colorText:Colors.white
       );
+      if(_inCartItems>0){
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
        return 0;
     }else if ((_inCartItems+quantity)>20){
-      Get.snackbar("Item count","You can't add more",backgroundColor:AppColors.mainColor,
-          colorText:Colors.white
-      );
+      Get.snackbar("Item count","You can't add more",backgroundColor:AppColors.mainColor, colorText:Colors.white);
        return 20;
     }else{
       return quantity;
@@ -80,6 +83,10 @@ class PopularProductController extends GetxController{
 
   int get totalItems{
     return _cartController.totalItems;
+  }
+
+  List<CartModel> get getItems{
+     return _cartController.getItems;
   }
 
 }

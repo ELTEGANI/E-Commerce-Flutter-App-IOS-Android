@@ -27,7 +27,8 @@ class CartController extends GetxController {
             img: value.img,
             quantity:value.quantity!+quantity,
             isExist: true,
-            time: DateTime.now().toString()
+            time: DateTime.now().toString(),
+            product: productModel
         );
       });
       if(tottalQuantity<=0){
@@ -44,7 +45,8 @@ class CartController extends GetxController {
               img: productModel.img,
               quantity: quantity,
               isExist: true,
-              time: DateTime.now().toString()
+              time: DateTime.now().toString(),
+              product: productModel
           );
         }
         );
@@ -54,7 +56,7 @@ class CartController extends GetxController {
         );
       }
     }
-
+     update();
   }
 
   bool existInCart(ProductModel productModel){
@@ -88,5 +90,13 @@ class CartController extends GetxController {
     return _items.entries.map((e){
       return e.value;
     }).toList();
+  }
+
+  int get totalAmount{
+    var total = 0;
+    _items.forEach((key, value) {
+       total += value.quantity!*value.price!;
+    });
+    return total;
   }
 }

@@ -56,6 +56,7 @@ class CartController extends GetxController {
         );
       }
     }
+    cartRepo.addToList(getItems);
      update();
   }
 

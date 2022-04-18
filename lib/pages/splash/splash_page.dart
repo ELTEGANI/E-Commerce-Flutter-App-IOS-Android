@@ -43,7 +43,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin{
        body:Column(
          mainAxisAlignment:MainAxisAlignment.center,
          children: [
-           ScaleTransition(scale: animation,
+           ScaleTransition(
+           scale: animation,
            child: Center(child: Image.asset("assets/image/logo part 1.png",width:Dimensions.splashImage))),
            Center(child: Image.asset("assets/image/logo part 2.png",width:Dimensions.splashImage,))
          ],

@@ -1,10 +1,5 @@
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/controllers/recommended_product_controler.dart';
-import 'package:e_commerace/pages/cart/cart_page.dart';
-import 'package:e_commerace/pages/food/recommended_food_detail.dart';
-import 'package:e_commerace/pages/home/food_page_body.dart';
-import 'package:e_commerace/pages/home/main_food_page.dart';
-import 'package:e_commerace/pages/splash/splash_page.dart';
 import 'package:e_commerace/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

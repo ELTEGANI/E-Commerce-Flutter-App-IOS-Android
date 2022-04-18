@@ -28,7 +28,7 @@ class RouteHelper{
       var pageId = Get.parameters['pageId'];
       var page = Get.parameters['page'];
       return PopularFoodDetial(pageId:int.parse(pageId!),page:page!);
-    },
+     },
       transition:Transition.fadeIn
     ),
 

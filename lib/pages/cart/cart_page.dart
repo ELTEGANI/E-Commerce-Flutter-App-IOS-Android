@@ -185,7 +185,7 @@ class CartPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap:(){
-
+                cartController.addToHistory();
                 },
                 child: Container(
                   child: BigText(text:"Check Out",color: Colors.white,),

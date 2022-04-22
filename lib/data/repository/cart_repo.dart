@@ -10,10 +10,13 @@ class CartRepo{
    CartRepo({required this.sharedPreferences});
    List<String> cart=[];
    List<String> cartHistory=[];
+
    void addToList(List<CartModel> cartList){
+     var time = DateTime.now().toString();
      cart=[];
      cartList.forEach((element) {
-       cart.add(jsonEncode(element));
+       element.time =time;
+      return cart.add(jsonEncode(element));
      });
      sharedPreferences.setStringList(AppConstants.CART_LIST, cart);
      print(sharedPreferences.getStringList(AppConstants.CART_LIST));

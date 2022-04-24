@@ -79,7 +79,7 @@ class CartPage extends StatelessWidget {
                                             .recommendedProductList
                                             .indexOf(_cartList[index].product!);
                                         if (recommendedIndex < 0) {
-                                            Get.snackbar("History Product","Product review is not available for history products",
+                                            Get.snackbar("History Product","Product review is not Available For History products",
                                             backgroundColor:AppColors.mainColor,
                                             colorText:Colors.white
                                             );

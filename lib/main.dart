@@ -1,6 +1,8 @@
 import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/controllers/recommended_product_controler.dart';
+import 'package:e_commerace/pages/auth/sign_up_page.dart';
+import 'package:e_commerace/pages/splash/splash_page.dart';
 import 'package:e_commerace/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,8 +27,9 @@ class MyApp extends StatelessWidget {
      return GetMaterialApp(
        debugShowCheckedModeBanner: false,
        title: 'Flutter Demo',
-       initialRoute: RouteHelper.getSplashPage(),
-       getPages: RouteHelper.routes,
+       home:SignUpPage(),
+      // initialRoute: RouteHelper.getSplashPage(),
+       //getPages: RouteHelper.routes,
      );
     });
    });

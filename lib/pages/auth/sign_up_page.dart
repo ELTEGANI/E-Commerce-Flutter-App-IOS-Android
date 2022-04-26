@@ -39,7 +39,7 @@ class SignUpPage extends StatelessWidget {
       }else if(password.isEmpty){
         showCustomSnackBar("Typed in your password",title:"Password");
       }else if(password.length<6){
-        showCustomSnackBar("password cant be less than 6",title:"Password");
+        showCustomSnackBar("password cant be less than 6 characters",title:"Password");
       }else{
         showCustomSnackBar("All went well",title:"perfect");
       }

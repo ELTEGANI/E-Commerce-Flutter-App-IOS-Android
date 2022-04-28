@@ -1,4 +1,6 @@
 import 'package:e_commerace/base/show_custom_snackbar.dart';
+import 'package:e_commerace/controllers/auth_controller.dart';
+import 'package:e_commerace/models/signup_body_model.dart';
 import 'package:e_commerace/utils/colors.dart';
 import 'package:e_commerace/utils/dimensions.dart';
 import 'package:e_commerace/widgets/app_text_field.dart';
@@ -24,6 +26,7 @@ class SignUpPage extends StatelessWidget {
       "g.png"
     ];
     void _registeration(){
+      var authController = Get.find<AuthController>();
       String name     = nameController.text.trim();
       String password = passwordController.text.trim();
       String email    = emailController.text.trim();
@@ -42,6 +45,14 @@ class SignUpPage extends StatelessWidget {
         showCustomSnackBar("password cant be less than 6 characters",title:"Password");
       }else{
         showCustomSnackBar("All went well",title:"perfect");
+        SignUpBody signUpBody = SignUpBody(name: name, phone: phone, email: email, password: password);
+        authController.registeration(signUpBody).then((status){
+          if(status.isSucess){
+             print("success registeration");
+          }else{
+            showCustomSnackBar(status.message);
+          }
+        });
       }
     }
     return Scaffold(

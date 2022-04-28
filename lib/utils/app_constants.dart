@@ -10,4 +10,6 @@ class AppConstants{
   static const String TOKEN = "DBtoken";
   static const String CART_LIST = "cart-list";
   static const String cartHistoryList= "cart-history-list";
+  static const String REGISTERATION_URI = "/api/v1/auth/register";
+
 }

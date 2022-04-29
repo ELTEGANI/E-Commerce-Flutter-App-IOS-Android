@@ -14,5 +14,6 @@ class AppConstants{
   static const String cartHistoryList= "cart-history-list";
   static const String REGISTERATION_URI = "/api/v1/auth/register";
   static const String LOGIN_URI = "/api/v1/auth/login";
+  static const String USER_INFO = "/api/v1/customer/info";
 
 }

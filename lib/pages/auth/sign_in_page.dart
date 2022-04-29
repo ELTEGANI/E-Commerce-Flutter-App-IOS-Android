@@ -62,7 +62,7 @@ class SignInPage extends StatelessWidget {
             SizedBox(height:Dimensions.height20),
             AppTextField(
                 textEditingController:passwordController,
-                hintText:"Password", iconData:Icons.password_sharp),
+                hintText:"Password", iconData:Icons.password_sharp,isObscure:true),
             SizedBox(height:Dimensions.height20),
             SizedBox(height:Dimensions.height10,),
             Row(

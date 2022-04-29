@@ -47,7 +47,7 @@ class SignUpPage extends StatelessWidget {
         SignUpBody signUpBody = SignUpBody(name: name, phone: phone, email: email, password: password);
         authController.registeration(signUpBody).then((status){
           if(status.isSuccess){
-             showCustomSnackBar("success registeration");
+             showCustomSnackBar("Success Registeration");
           }else{
             showCustomSnackBar(status.message);
           }
@@ -80,7 +80,7 @@ class SignUpPage extends StatelessWidget {
               SizedBox(height:Dimensions.height20),
               AppTextField(
                   textEditingController:passwordController,
-                  hintText:"Password", iconData:Icons.password_sharp),
+                  hintText:"Password", iconData:Icons.password_sharp,isObscure:true),
               SizedBox(height:Dimensions.height20),
               AppTextField(
                   textEditingController:nameController,

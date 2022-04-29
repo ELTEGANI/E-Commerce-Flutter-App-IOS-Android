@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
      return GetMaterialApp(
        debugShowCheckedModeBanner: false,
        title: 'Flutter Demo',
-       home:SignInPage(),
-      // initialRoute: RouteHelper.getSplashPage(),
-       //getPages: RouteHelper.routes,
+       //home:SignInPage(),
+      initialRoute: RouteHelper.getSplashPage(),
+      getPages: RouteHelper.routes,
      );
     });
    });

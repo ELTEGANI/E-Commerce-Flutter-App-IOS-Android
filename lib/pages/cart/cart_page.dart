@@ -1,4 +1,5 @@
 import 'package:e_commerace/base/no_data_page.dart';
+import 'package:e_commerace/controllers/auth_controller.dart';
 import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
@@ -202,7 +203,11 @@ class CartPage extends StatelessWidget {
             ),
             GestureDetector(
               onTap:(){
-                cartController.addToHistory();
+                if(Get.find<AuthController>().userLoggedIn()){
+                  cartController.addToHistory();
+                }else{
+                 Get.toNamed(RouteHelper.getSignInPage());
+                }
               },
               child: Container(
                 child: BigText(text:"Check Out",color: Colors.white,),

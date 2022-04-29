@@ -28,7 +28,7 @@ responseModel = ResponseModel(true,"Successfully");
 }else{
 responseModel = ResponseModel(false,response.statusText!);
 }
-_isLoading = false;
+_isLoading = true;
 update();
 return responseModel;
 }

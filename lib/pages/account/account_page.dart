@@ -120,7 +120,7 @@ class AccountPage extends StatelessWidget {
             ],
           ),
         ):
-        CustomLoader()):
+        const CustomLoader()):
         Center(child:Text("You Must Login"));
       }),
     );

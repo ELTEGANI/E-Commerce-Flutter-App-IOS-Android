@@ -1,4 +1,6 @@
+import 'package:e_commerace/base/custom_loader.dart';
 import 'package:e_commerace/pages/auth/sign_up_page.dart';
+import 'package:e_commerace/routes/route_helper.dart';
 import 'package:e_commerace/utils/colors.dart';
 import 'package:e_commerace/utils/dimensions.dart';
 import 'package:e_commerace/widgets/app_text_field.dart';
@@ -29,10 +31,11 @@ class SignInPage extends StatelessWidget {
       }else if(password.isEmpty){
         showCustomSnackBar("Typed in your password",title:"Password");
       }else{
-        authController.login(email,password).then((status){
+        authController.login(email,password,"09090909").then((status){
           if(status.isSuccess){
-            showCustomSnackBar("Success Registeration");
+            Get.toNamed(RouteHelper.getInitial());
           }else{
+            print(status.message.toString());
             showCustomSnackBar(status.message);
           }
         });
@@ -41,104 +44,111 @@ class SignInPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor:Colors.white,
-      body:SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(height:Dimensions.screenHeight*0.05),
-            Container(
-              height:Dimensions.screenHeight*0.25,
-              child: Center(
-                child: CircleAvatar(
-                  backgroundColor:Colors.white,
-                  radius:80,
-                  backgroundImage: AssetImage(
-                      "assets/image/logo part 1.png"
+      body:GetBuilder<AuthController>(builder:(authController){
+        return !authController.isLoading?SingleChildScrollView(
+          physics:BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(height:Dimensions.screenHeight*0.05),
+              Container(
+                height:Dimensions.screenHeight*0.25,
+                child: Center(
+                  child: CircleAvatar(
+                    backgroundColor:Colors.white,
+                    radius:80,
+                    backgroundImage: AssetImage(
+                        "assets/image/logo part 1.png"
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              margin:EdgeInsets.only(left:Dimensions.width20),
-              width:double.maxFinite,
-              child:Column(
-                crossAxisAlignment:CrossAxisAlignment.start,
+              Container(
+                margin:EdgeInsets.only(left:Dimensions.width20),
+                width:double.maxFinite,
+                child:Column(
+                  crossAxisAlignment:CrossAxisAlignment.start,
+                  children: [
+                    Text("Hello",style:TextStyle(
+                        fontSize:Dimensions.font16*3+Dimensions.font20/2,
+                        fontWeight:FontWeight.bold
+                    ),
+                    ),
+                    Text("Sign into your account",style:TextStyle(
+                        fontSize:Dimensions.font20,
+                        color:Colors.grey[500]
+                    ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height:Dimensions.screenHeight*0.05,),
+              AppTextField(
+                  textEditingController:emailController,
+                  hintText:"Email", iconData:Icons.email),
+              SizedBox(height:Dimensions.height20),
+              AppTextField(
+                  textEditingController:passwordController,
+                  hintText:"Password", iconData:Icons.password_sharp,isObscure:true),
+              SizedBox(height:Dimensions.height20),
+              SizedBox(height:Dimensions.height10,),
+              Row(
                 children: [
-                  Text("Hello",style:TextStyle(
-                    fontSize:Dimensions.font16*3+Dimensions.font20/2,
-                    fontWeight:FontWeight.bold
-                  ),
-                  ),
-                  Text("Sign into your account",style:TextStyle(
-                      fontSize:Dimensions.font20,
-                      color:Colors.grey[500]
-                  ),
-                  )
+                  Expanded(child:Container()),
+                  RichText(text: TextSpan(
+                      text:"Sign into your account",
+                      style:TextStyle(
+                          color:Colors.grey[500],
+                          fontSize: Dimensions.font20
+                      )
+                  )),
+                  SizedBox(width:Dimensions.height20,)
                 ],
               ),
-            ),
-            SizedBox(height:Dimensions.screenHeight*0.05,),
-            AppTextField(
-                textEditingController:emailController,
-                hintText:"Email", iconData:Icons.email),
-            SizedBox(height:Dimensions.height20),
-            AppTextField(
-                textEditingController:passwordController,
-                hintText:"Password", iconData:Icons.password_sharp,isObscure:true),
-            SizedBox(height:Dimensions.height20),
-            SizedBox(height:Dimensions.height10,),
-            Row(
-              children: [
-                Expanded(child:Container()),
-                RichText(text: TextSpan(
-                    text:"Sign into your account",
-                    style:TextStyle(
-                        color:Colors.grey[500],
-                        fontSize: Dimensions.font20
+              SizedBox(height:Dimensions.screenHeight*0.05,),
+              GestureDetector(
+                onTap:(){
+                  _login(authController);
+                },
+                child: Container(
+                  width:Dimensions.screenWidth/2,
+                  height:Dimensions.screenHeight/13,
+                  decoration:BoxDecoration(
+                      borderRadius:BorderRadius.circular(Dimensions.radius30),
+                      color:AppColors.mainColor
+                  ),
+                  child:Center(
+                    child: BigText(
+                      text:"Sign in",
+                      size:Dimensions.font20+Dimensions.font20/2,
+                      color:Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height:Dimensions.screenHeight*0.05,),
+              RichText(text: TextSpan(
+                  text:"Dont\'t an account?",
+                  style:TextStyle(
+                      color:Colors.grey[500],
+                      fontSize: Dimensions.font20
+                  ),
+                  children:[
+                    TextSpan(
+                        recognizer:TapGestureRecognizer()..onTap=()=>Get.to(()=>SignUpPage(),transition:Transition.fade),
+                        text:" Create",
+                        style:TextStyle(
+                            fontWeight:FontWeight.bold,
+                            color:AppColors.mainBlackColor,
+                            fontSize: Dimensions.font20
+                        )
                     )
-                )),
-                SizedBox(width:Dimensions.height20,)
-              ],
-            ),
-            SizedBox(height:Dimensions.screenHeight*0.05,),
-            Container(
-              width:Dimensions.screenWidth/2,
-              height:Dimensions.screenHeight/13,
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(Dimensions.radius30),
-                  color:AppColors.mainColor
+                  ]
               ),
-              child:Center(
-                child: BigText(
-                  text:"Sign in",
-                  size:Dimensions.font20+Dimensions.font20/2,
-                  color:Colors.white,
-                ),
               ),
-            ),
-            SizedBox(height:Dimensions.screenHeight*0.05,),
-            RichText(text: TextSpan(
-                text:"Dont\'t an account?",
-                style:TextStyle(
-                    color:Colors.grey[500],
-                    fontSize: Dimensions.font20
-                ),
-              children:[
-                TextSpan(
-                recognizer:TapGestureRecognizer()..onTap=()=>Get.to(()=>SignUpPage(),transition:Transition.fade),
-                text:" Create",
-                style:TextStyle(
-                    fontWeight:FontWeight.bold,
-                    color:AppColors.mainBlackColor,
-                    fontSize: Dimensions.font20
-                )
-                )
-              ]
-            ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        ):CustomLoader();
+      }),
 
     );
 

@@ -1,4 +1,5 @@
 import 'package:e_commerace/pages/account/account_page.dart';
+import 'package:e_commerace/pages/auth/sign_in_page.dart';
 import 'package:e_commerace/pages/auth/sign_up_page.dart';
 import 'package:e_commerace/pages/cart/cart_history.dart';
 import 'package:e_commerace/pages/home/main_food_page.dart';
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
 
     List pages = [
       MainFoodPage(),
-      SignUpPage(),
+      Container(child:Text("History Page"),),
       CartHistory(),
       AccountPage()
     ];

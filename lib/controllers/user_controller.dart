@@ -18,17 +18,15 @@ bool get isLoading => _isLoading;
 UserModel get userModel => _userModel;
 
 Future <ResponseModel> getUserInfo() async{
-_isLoading = true;
-update();
 Response response = await userRepo.getUserInfo();
 late ResponseModel responseModel;
 if(response.statusCode==200){
 _userModel = UserModel.fromJson(response.body);
+_isLoading = true;
 responseModel = ResponseModel(true,"Successfully");
 }else{
 responseModel = ResponseModel(false,response.statusText!);
 }
-_isLoading = true;
 update();
 return responseModel;
 }

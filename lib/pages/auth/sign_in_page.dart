@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../base/show_custom_snackbar.dart';
+import '../../controllers/auth_controller.dart';
+
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -16,6 +19,25 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
+    void _login(AuthController authController){
+      String password = passwordController.text.trim();
+      String email    = emailController.text.trim();
+     if(email.isEmpty){
+        showCustomSnackBar("Typed in your email address",title:"Email Address");
+      }else if(!GetUtils.isEmail(email)){
+        showCustomSnackBar("Typed in your valid email address",title:"Valid Email Address");
+      }else if(password.isEmpty){
+        showCustomSnackBar("Typed in your password",title:"Password");
+      }else{
+        authController.login(email,password).then((status){
+          if(status.isSuccess){
+            showCustomSnackBar("Success Registeration");
+          }else{
+            showCustomSnackBar(status.message);
+          }
+        });
+      }
+    }
 
     return Scaffold(
       backgroundColor:Colors.white,
@@ -117,6 +139,8 @@ class SignInPage extends StatelessWidget {
           ],
         ),
       ),
+
     );
+
   }
 }

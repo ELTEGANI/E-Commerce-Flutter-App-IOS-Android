@@ -1,15 +1,17 @@
 import 'package:e_commerace/utils/app_constants.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient extends GetConnect implements GetxService{
   late String token;
   final String appBaseUrl;
   late Map<String,String> _mainHeaders;
+  late SharedPreferences sharedPreference;
 
-  ApiClient({required this.appBaseUrl}){
+  ApiClient({required this.appBaseUrl,required this.sharedPreference}){
     baseUrl = appBaseUrl;
-    timeout = Duration(seconds: 30);
-    token = AppConstants.TOKEN;
+    timeout = const Duration(seconds:30);
+    token = sharedPreference.getString(AppConstants.TOKEN)??"";
     _mainHeaders={
       'Content-type':'application/json; charset=UTF-8',
       'Authorization':'Bearer $token',

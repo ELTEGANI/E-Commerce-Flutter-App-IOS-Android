@@ -1,9 +1,6 @@
 import 'package:e_commerace/controllers/cart_controller.dart';
 import 'package:e_commerace/controllers/popular_product_controller.dart';
 import 'package:e_commerace/controllers/recommended_product_controler.dart';
-import 'package:e_commerace/pages/auth/sign_in_page.dart';
-import 'package:e_commerace/pages/auth/sign_up_page.dart';
-import 'package:e_commerace/pages/splash/splash_page.dart';
 import 'package:e_commerace/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,8 +15,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Get.find<CartController>().getCartData();

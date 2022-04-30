@@ -12,14 +12,14 @@ import 'package:e_commerace/utils/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../controllers/recommended_product_controler.dart';
 
+
 Future<void> init()async {
- final sharedPreferences = await SharedPreferences.getInstance();
- Get.lazyPut(()=>sharedPreferences);
+ final sharedPreference = await SharedPreferences.getInstance();
+ Get.lazyPut(()=>sharedPreference);
  //api client
- Get.lazyPut(()=>ApiClient(appBaseUrl: AppConstants.BASE_URL));
+ Get.lazyPut(()=>ApiClient(appBaseUrl: AppConstants.BASE_URL,sharedPreference:Get.find()));
  Get.lazyPut(()=>AuthRepo(apiClient:Get.find(),sharedPreferences:Get.find()));
  Get.lazyPut(()=>UserRepo(apiClient:Get.find()));
  //repos

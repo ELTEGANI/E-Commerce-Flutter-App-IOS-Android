@@ -2,6 +2,7 @@ import 'package:e_commerace/base/custom_loader.dart';
 import 'package:e_commerace/base/show_custom_snackbar.dart';
 import 'package:e_commerace/controllers/auth_controller.dart';
 import 'package:e_commerace/models/signup_body_model.dart';
+import 'package:e_commerace/routes/route_helper.dart';
 import 'package:e_commerace/utils/colors.dart';
 import 'package:e_commerace/utils/dimensions.dart';
 import 'package:e_commerace/widgets/app_text_field.dart';
@@ -47,7 +48,7 @@ class SignUpPage extends StatelessWidget {
         SignUpBody signUpBody = SignUpBody(name: name, phone: phone, email: email, password: password);
         authController.registeration(signUpBody).then((status){
           if(status.isSuccess){
-             showCustomSnackBar("Success Registeration");
+             Get.offNamed(RouteHelper.getSignInPage());
           }else{
             showCustomSnackBar(status.message);
           }
